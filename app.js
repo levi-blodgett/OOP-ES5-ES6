@@ -175,3 +175,53 @@ console.log(mary.hasOwnProperty('getFullName'));
 
 // This is true because it is in the actual object
 console.log(mary.hasOwnProperty('firstName'));
+
+
+//////////////////
+// PROTOTYPAL INHERITANCE
+//////////////////
+
+
+// Person constructor
+function Person1(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+}
+
+// Greeting
+Person1.prototype.greeting = function() {
+  return `Hello there, ${this.firstName} ${this.lastName}.`
+}
+
+const person1 = new Person1('John', 'Doe');
+
+console.log(person1.greeting());
+
+// Customer constructor
+function Customer(firstName, lastName, phone, membership) {
+  // .call or call is a function that allows us to call another function from somewhere else in the current context
+  Person1.call(this, firstName, lastName);
+
+  this.phone = phone;
+  this.membership = membership;
+}
+
+// Inherit the Person prototype methods
+Customer.prototype = Object.create(Person1.prototype);
+
+// Make customer.prototype return Customer()
+Customer.prototype.constructor = Customer;
+
+// Create customer
+const customer1 = new Customer('Tom', 'Smith', '555-555-5555', 'Standard');
+
+console.log(customer1);
+
+// Customer greeting
+Customer.prototype.greeting = function(){
+  return `Hello there, ${this.firstName} ${this.lastName}. Welcome to our company!`
+}
+
+// Possible only because we inheritted the Person prototype methods
+console.log(customer1.greeting());
+console.log(person1.greeting());
