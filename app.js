@@ -18,21 +18,21 @@ console.log(levi.name);
 
 // Person Constructor
 // Constructors have to be started with a capital letter
-function Person(name, dob) {
-  this.name = name;
-  this.birthday = new Date(dob);
-  this.calculateAge = function() {
-    const diff = Date.now() - this.birthday.getTime();
-    const ageDate = new Date(diff);
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-}
+// function Person(name, dob) {
+//   this.name = name;
+//   this.birthday = new Date(dob);
+//   this.calculateAge = function() {
+//     const diff = Date.now() - this.birthday.getTime();
+//     const ageDate = new Date(diff);
+//     return Math.abs(ageDate.getUTCFullYear() - 1970);
+//   }
+// }
 
 const jess = new Person('Jessica', '12-8-1996');
 const tyler = new Person('Tyler', '1-1-1995');
 
 console.log(jess);
-console.log(tyler.calculateAge());
+// console.log(tyler.calculateAge());
 
 // When 'this' is in the global scope then it pertains to the Window object
 
@@ -115,3 +115,63 @@ console.log(re1);
 console.log(re2);
 console.log(re3);
 console.log(typeof re3); // logs object
+
+
+//////////////////
+// PROTOTYPES
+//////////////////
+
+
+// Explaining Prototypes
+// Each object in JavaScript has a prototype and a prototype is an object itself
+// All objects inherit their properties and methods from their prototype
+// When you are dealing with object literals you are inheriting from a prototype called object.prototype
+// When you are dealing with constructors like the Person constructor above, it will inherit from a prototype like Person.prototype
+
+// Person Constructor
+function Person(firstName, lastName, dob) {
+  // Each person must have these 3 things, therefore these should be properties of the constructor
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.birthday = new Date(dob);
+  // The calculateAge function however, is going to be the same for every person, so it is something that should be put in the prototype and not the object
+  // this.calculateAge = function() {
+  //   const diff = Date.now() - this.birthday.getTime();
+  //   const ageDate = new Date(diff);
+  //   return Math.abs(ageDate.getUTCFullYear() - 1970);
+  // }
+}
+
+// Calculate age
+Person.prototype.calculateAge = function() {
+  const diff = Date.now() - this.birthday.getTime();
+  const ageDate = new Date(diff);
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
+// Get full name
+Person.prototype.getFullName = function() {
+  return `${this.firstName} ${this.lastName}`
+}
+
+// Gets Married
+Person.prototype.getsMarried = function(newLastName){
+  this.lastName = newLastName;
+}
+
+const john = new Person('John', 'Doe', '8-12-90');
+const mary = new Person('Mary', 'Johnson', 'March 20 1978');
+
+console.log(mary);
+
+console.log(john.calculateAge());
+
+console.log(mary.getFullName());
+mary.getsMarried('Smith');
+console.log(mary.getFullName());
+
+// This isn't true because it is in the prototype
+console.log(mary.hasOwnProperty('getFullName'));
+
+// This is true because it is in the actual object
+console.log(mary.hasOwnProperty('firstName'));
