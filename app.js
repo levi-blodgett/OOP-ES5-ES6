@@ -225,3 +225,31 @@ Customer.prototype.greeting = function(){
 // Possible only because we inheritted the Person prototype methods
 console.log(customer1.greeting());
 console.log(person1.greeting());
+
+const personPrototypes = {
+  greeting: function() {
+    return `Hello there, ${this.firstName} ${this.lastName}.`;
+  },
+  getsMarried: function(newLastName) {
+    this.lastName = newLastName;
+  }
+}
+
+const josie = Object.create(personPrototypes);
+josie.firstName = 'Josie';
+josie.lastName = 'Williams';
+josie.age = 30;
+
+josie.getsMarried('Thompson');
+
+console.log(josie.greeting());
+
+const jacob = Object.create(personPrototypes, {
+  firstName: {value: 'Jacob'},
+  lastName: {value: 'Blood'},
+  age: {value: 28}
+});
+
+console.log(jacob);
+
+console.log(jacob.greeting());
