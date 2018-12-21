@@ -253,3 +253,49 @@ const jacob = Object.create(personPrototypes, {
 console.log(jacob);
 
 console.log(jacob.greeting());
+
+
+//////////////////
+// ES6 CLASSES
+//////////////////
+
+
+// Syntax sugar, they aren't necessary but make it more like other languages and easier to read
+class Person2 {
+  // constructor will take any properties we want to set
+  constructor(firstName, lastName, dob) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthday = new Date(dob);
+  }
+
+
+  greeting() {
+    return `Hello there, ${this.firstName} ${this.lastName}.`
+  }
+
+  calculateAge() {
+    const diff = Date.now() - this.birthday.getTime();
+    const ageDate = new Date(diff);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  getsMarried(newLastName) {
+    this.lastName = newLastName;
+  }
+
+  // Static method, you can use without instantiating an object, basically a standalone method
+  static addNumbers(x, y) {
+    return x + y;
+  }
+}
+
+const jamie = new Person2('Jamie', 'Blodgett');
+
+console.log(jamie);
+
+jamie.getsMarried('Thompson');
+
+console.log(jamie.greeting());
+
+console.log(Person2.addNumbers(1, 2));
