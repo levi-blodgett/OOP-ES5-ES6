@@ -299,3 +299,42 @@ jamie.getsMarried('Thompson');
 console.log(jamie.greeting());
 
 console.log(Person2.addNumbers(1, 2));
+
+
+//////////////////
+// ES6 SUBCLASSES / SUBCLASSES
+//////////////////
+
+
+class Person3 {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  greeting() {
+    return `Hello there, ${this.firstName} ${this.lastName}.`
+  }
+}
+
+// Customer3 is a subclass of Person3 now
+class Customer3 extends Person3 {
+  constructor(firstName, lastName, phone, membership) {
+    // super() is a function that calls parent class constructor
+    super(firstName, lastName);
+
+    this.phone = phone;
+    this.membership = membership;
+  }
+
+  static getMembershipCost() {
+    return 500;
+  }
+}
+
+const johnny = new Customer3('Johnny', 'Doolittle', '888-888-8888', 'Standard');
+console.log(johnny);
+
+console.log(johnny.greeting());
+
+console.log(Customer3.getMembershipCost());
