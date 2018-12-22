@@ -128,6 +128,17 @@ console.log(typeof re3); // logs object
 // When you are dealing with object literals you are inheriting from a prototype called object.prototype
 // When you are dealing with constructors like the Person constructor above, it will inherit from a prototype like Person.prototype
 
+// WHAT IS A PROPERTY: 
+
+// Properties are the values associated with a JavaScript object.
+// A JavaScript object is a collection of unordered properties.
+// Properties can usually be changed, added, and deleted, but some are read only.
+
+// WHAT IS A PROTOTYPE:
+
+// A prototype is a property on a function that points to an object
+// A prototype is a property that every function you create in JavaScript has, that points to an object
+
 // Person Constructor
 function Person(firstName, lastName, dob) {
   // Each person must have these 3 things, therefore these should be properties of the constructor
@@ -327,6 +338,7 @@ class Customer3 extends Person3 {
     this.membership = membership;
   }
 
+  // Static method that can be called with the Customer3 class
   static getMembershipCost() {
     return 500;
   }
