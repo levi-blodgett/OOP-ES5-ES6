@@ -89,6 +89,8 @@ const getSum1 = function(x, y) {
 }
 
 const getSum2 = new Function('x', 'y', 'return 1 + 1');
+console.log(typeof getSum2); // logs function
+
 
 // Object
 const john1 = {name: 'John'};
