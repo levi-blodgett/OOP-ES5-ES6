@@ -347,8 +347,8 @@ class Customer3 extends Person3 {
 }
 
 const johnny = new Customer3('Johnny', 'Doolittle', '888-888-8888', 'Standard');
-console.log(johnny);
+console.log(johnny); // logs an object "Customer3", with all of their info
 
-console.log(johnny.greeting());
+console.log(johnny.greeting()); // logs "Hello three, Johnny Doolittle."
 
-console.log(Customer3.getMembershipCost());
+console.log(Customer3.getMembershipCost()); // returns 500
